@@ -17,6 +17,13 @@ public class Constants
 
     public static String CONNECTION_STRING()
     {
-        return @"Server=.;Database=Cards;User Id=richard;Password=richard;";
+        if (Environment.MachineName == "7PG5CC2")
+        {
+            return @"Server=.\localtest;Database=Cards;User Id=richard;Password=richard;";
+        }
+        else
+        {
+            return @"Server=.;Database=Cards;User Id=richard;Password=richard;";
+        }
     }    
 }

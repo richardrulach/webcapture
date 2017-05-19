@@ -1,10 +1,11 @@
 
-use cards
-go
+USE cards
+GO
 
-
-create table CapturedText(
-	CapturedTextId int identity(1,1) PRIMARY KEY,
-	[Text] nvarchar(1000) NOT NULL
+CREATE TABLE CapturedText(
+	CapturedTextId	INT					IDENTITY(1,1)		PRIMARY KEY,
+	[Text]			NVARCHAR(1000)		NOT NULL,
+	dtAdded			DATETIME			NOT NULL			DEFAULT GETDATE(),
+	dtUpdated		DATETIME			NOT NULL			DEFAULT GETDATE()
 )
 
