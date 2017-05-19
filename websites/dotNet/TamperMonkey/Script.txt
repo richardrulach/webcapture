@@ -1,0 +1,38 @@
+// ==UserScript==
+// @name         Save selected text
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://docs.microsoft.com/en-us/sql/data-quality-services/data-quality-services
+// @grant        GM_xmlhttpRequest
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    document.onmouseup = function(){
+        //console.log(window.getSelection().toString());
+        SaveText(window.getSelection().toString());
+    };
+
+
+    
+})();
+
+function SaveText(s){
+GM_xmlhttpRequest({
+        method: "POST",
+        url: "http://localhost:8028/_srv/WebService.asmx/SaveText",
+        data:"inputText=" + encodeURI(s),
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        onerror: function(response) {
+             alert(response.responseText);
+        },
+        onload: function(response) {
+        //     alert(response.responseText);
+        }
+    });    
+}
