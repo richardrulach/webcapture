@@ -4,7 +4,8 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://docs.microsoft.com/en-us/sql/data-quality-services/data-quality-services
+// @match        https://docs.microsoft.com/en-us/sql/*
+// @match        https://www.safaribooksonline.com/library/*
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
@@ -13,7 +14,8 @@
 
     document.onmouseup = function(){
         //console.log(window.getSelection().toString());
-        SaveText(window.getSelection().toString());
+        var sHighlightedText = window.getSelection().toString();
+        if (sHighlightedText.length > 0) SaveText();
     };
 
 
