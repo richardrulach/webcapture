@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Web.Script.Services;
+using System.Web.Script.Serialization;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections;
 
 /// <summary>
 /// Summary description for WebService
@@ -72,5 +75,36 @@ public class WebService : System.Web.Services.WebService {
 
         return "";
     }
-    
+
+
+    [WebMethod]
+    public string GetText()
+    {
+        String conn = Constants.CONNECTION_STRING();
+        
+        ArrayList al = new ArrayList();
+
+        String sql = @"select [text] from CapturedText ";
+
+        SqlCommand runRulesCmd = new SqlCommand();
+        SqlConnection sqlconnection = new SqlConnection(conn);
+
+        runRulesCmd.Connection = sqlconnection;
+        runRulesCmd.CommandText = sql;
+
+        sqlconnection.Open();
+        SqlDataReader dr = runRulesCmd.ExecuteReader();
+
+        List<String> myText = new List<String>();
+
+        while (dr.Read())
+        {
+            myText.Add(dr.GetValue(0).ToString());
+        }
+        dr.Close();
+
+        return new JavaScriptSerializer().Serialize(myText);
+    }
+
+
 }
