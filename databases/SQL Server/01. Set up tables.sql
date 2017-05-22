@@ -17,6 +17,9 @@ ADD CONSTRAINT FK_CategoryParent FOREIGN KEY(ParentId)
 REFERENCES Category(CategoryId);
 GO
 
+INSERT INTO Category([Name], [isCurrent])
+VALUES('Root', 1)
+
 CREATE TABLE TextType (
 	TextTypeId		INT					IDENTITY(1,1)		PRIMARY KEY,
 	[Name]			NVARCHAR(100)		NOT NULL,
