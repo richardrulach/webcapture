@@ -47,7 +47,7 @@
                 var xDoc = $(data).find('string').text();
                 var obj = JSON.parse(xDoc);
                 for (var i = 0 ; i < obj.length; i++) {
-                    $('#listContainer').append('<div class="qContainer"><div class="questions" contenteditable="true">' + obj[i] + '</div><div class="answers"> </div></div>');
+                    $('#listContainer').append('<div class="qContainer"><div class="questions" contenteditable="true">' + obj[i] + '</div><div class="answers" contenteditable="true"> </div></div>');
                 }
 
                 reloadEvents();
