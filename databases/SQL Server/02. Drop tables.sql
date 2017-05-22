@@ -1,5 +1,9 @@
 
-use cards
+USE cards
 
-drop table CapturedText
+DROP TABLE [Text]
+DROP TABLE [TextType];
+DROP TABLE [Category];
+
+
 
