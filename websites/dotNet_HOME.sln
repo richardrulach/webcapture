@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "dotNet", "dotNet\", "{0C25B8B8-971B-4A92-9ECF-5FDF776B24FE}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/dotNet"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\DEVELOPMENT\GITHUB\webcapture\websites\dotNet\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\dotNet\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/dotNet"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\DEVELOPMENT\GITHUB\webcapture\websites\dotNet\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\dotNet\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1249"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C25B8B8-971B-4A92-9ECF-5FDF776B24FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C25B8B8-971B-4A92-9ECF-5FDF776B24FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
