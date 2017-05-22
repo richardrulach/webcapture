@@ -35,7 +35,7 @@ public class WebService : System.Web.Services.WebService {
     {
         String conn = Constants.CONNECTION_STRING();
 
-        String sql = @"insert into CapturedText([text]) values ('" + inputText + "')";
+        String sql = @"insert into [text]([textTypeId],[CategoryId],[text]) values (1,1,'" + inputText + "')";
 
         SqlCommand runRulesCmd = new SqlCommand();
         SqlConnection sqlconnection = new SqlConnection(conn);
@@ -58,7 +58,7 @@ public class WebService : System.Web.Services.WebService {
     {
         String conn = Constants.CONNECTION_STRING();
 
-        String sql = @"insert into CapturedText([text]) values ('defaultText')";
+        String sql = @"insert into [text]([textTypeId],[CategoryId],[text]) values (1, 1,'defaultText')";
 
         SqlCommand runRulesCmd = new SqlCommand();
         SqlConnection sqlconnection = new SqlConnection(conn);
@@ -84,7 +84,7 @@ public class WebService : System.Web.Services.WebService {
         
         ArrayList al = new ArrayList();
 
-        String sql = @"select [text] from CapturedText ";
+        String sql = @"select [text] from Text ";
 
         SqlCommand runRulesCmd = new SqlCommand();
         SqlConnection sqlconnection = new SqlConnection(conn);
