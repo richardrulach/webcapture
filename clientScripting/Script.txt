@@ -15,7 +15,7 @@
     document.onmouseup = function(){
         //console.log(window.getSelection().toString());
         var sHighlightedText = window.getSelection().toString();
-        if (sHighlightedText.length > 0) SaveText();
+        if (sHighlightedText.length > 0) SaveText(sHighlightedText);
     };
 
 
