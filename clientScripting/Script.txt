@@ -2,8 +2,8 @@
 // @name         Save selected text
 // @namespace    http://tampermonkey.net/
 // @version      0.2
-// @description  try to take over the world!
-// @author       You
+// @description  Saves pairs of question and answer to webservice
+// @author       Richard Rulach
 // @match        https://docs.microsoft.com/en-us/sql/*
 // @match        https://www.safaribooksonline.com/library/*
 // @grant        GM_xmlhttpRequest
@@ -54,7 +54,7 @@ var modal, span, modalText, bInEditor;
     GM_addStyle(css);
     
     var body = document.getElementsByTagName('body')[0];
-    body.innerHTML = body.innerHTML + '<div id="myModal" class="modal"><div class="modal-content"><span id="rrClose">&times;</span><div id="modalText"></></div></div>';
+    body.innerHTML = body.innerHTML + '<div id="myModal" class="modal"><div class="modal-content"><span id="rrClose">&times;</span><div id="modalText" contenteditable="true"></></div></div>';
     
     modal = document.getElementById('myModal');
     modalText = document.getElementById('modalText');
