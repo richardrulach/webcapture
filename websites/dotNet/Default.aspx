@@ -13,7 +13,7 @@
 
         .answers 
         {
-            padading-left: 15px;
+            padding-left: 15px;
             width:45%;
             float:left;
         }

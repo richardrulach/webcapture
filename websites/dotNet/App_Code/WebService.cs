@@ -31,11 +31,11 @@ public class WebService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public string SaveText(String inputText)
+    public string SaveText(String question, String answer)
     {
         String conn = Constants.CONNECTION_STRING();
 
-        String sql = @"insert into [text]([textTypeId],[CategoryId],[text]) values (1,1,'" + inputText + "')";
+        String sql = @"insert into [text]([textTypeId],[CategoryId],[question],[answer]) values (1,1,'" + question + "','" + answer + "')";
 
         SqlCommand runRulesCmd = new SqlCommand();
         SqlConnection sqlconnection = new SqlConnection(conn);
@@ -50,7 +50,7 @@ public class WebService : System.Web.Services.WebService {
         sqlconnection.Close();
         sqlconnection.Dispose();
 
-        return "Saved input text: " + inputText;
+        return "Saved question: " + question + " answer: " + answer;
     }
 
     [WebMethod]
