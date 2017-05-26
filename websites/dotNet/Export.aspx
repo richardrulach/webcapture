@@ -18,13 +18,21 @@
             var $temp = $("<input>");
             $("body").append($temp);
             $temp.val($(element).text()).select();
-            document.execCommand("copy");
+            document.execCommand("Copy");
             $temp.remove();
         }
+
+        function Copy() {
+            copyToClipboard($('#txtOutput'));
+        }
+
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
+    <div>
+        <a href="javascript:Copy()">RUN COPY</a>
+    </div>
     <div id="txtOutput">
         <asp:Literal ID="LitOutput" runat="server" />
     </div>
