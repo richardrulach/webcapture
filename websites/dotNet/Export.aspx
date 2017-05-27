@@ -11,14 +11,15 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            copyToClipboard($('#txtOutput'));
+//            copyToClipboard($('#txtOutput'));
         });
+
 
         function copyToClipboard(element) {
             var $temp = $("<input>");
             $("body").append($temp);
             $temp.val($(element).text()).select();
-            document.execCommand("Copy");
+            document.execCommand("copy");
             $temp.remove();
         }
 
@@ -31,7 +32,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <a href="javascript:Copy()">RUN COPY</a>
+        <input type="button" onclick="copyToClipboard(document.getElementById('txtOutput'))" value="Copy" />
     </div>
     <div id="txtOutput">
         <asp:Literal ID="LitOutput" runat="server" />

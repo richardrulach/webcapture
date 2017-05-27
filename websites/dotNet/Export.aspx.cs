@@ -15,7 +15,7 @@ public partial class Export : System.Web.UI.Page
 
         String output = string.Empty;
 
-        string liveConnection = @"Server=.\localtest;Database=Cards;User Id=richard;Password=richard;";
+        string liveConnection = Constants.CONNECTION_STRING();// @"Server=.\localtest;Database=Cards;User Id=richard;Password=richard;";
 
         SqlConnection sqlconnection = new SqlConnection(liveConnection);
         sqlconnection.Open();
