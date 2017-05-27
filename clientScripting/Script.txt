@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Save selected text
-// @namespace    http://tampermonkey.net/
+// @namespace    http://dev129.com/
 // @version      0.2
 // @description  Saves pairs of question and answer to webservice
 // @author       Richard Rulach
@@ -10,7 +10,7 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-var modal, span, modalText, bInEditor;
+var modal, span, modalText, bInEditor, prefix;
 
 (function() {
     'use strict';
@@ -54,38 +54,51 @@ var modal, span, modalText, bInEditor;
     GM_addStyle(css);
     
     var body = document.getElementsByTagName('body')[0];
-    body.innerHTML = body.innerHTML + '<div id="myModal" class="modal"><div class="modal-content"><span id="rrClose">&times;</span><div id="modalText" contenteditable="true"></></div></div>';
+    body.innerHTML = body.innerHTML + '<div id="myModal" class="modal"><div class="modal-content"><span id="rrClose">&times;</span><div>Prefix: <input type="text" id="txtPrefix" /> <span id="spanClearPrefix">clear</span></div><div id="modalText" contenteditable="true"></></div></div>';
     
     modal = document.getElementById('myModal');
     modalText = document.getElementById('modalText');
-    span = document.getElementsByClassName("close")[0];
+    span = document.getElementById('rrClose');
     bInEditor = false;
+    
+    prefix = document.getElementById('spanClearPrefix');
     
     span.onclick = function() {
         modal.style.display = "none";
+        bInEditor = false;
     };
+
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            bInEditor = false;
         }
+    };
+
+    prefix.onclick = function(){
+        document.getElementById('txtPrefix').value = '';
     };
     
     document.onmouseup = function(){
         //console.log(window.getSelection().toString());
         var selObj = window.getSelection();
         var sHighlightedText = selObj.toString();
-        var allText = modalText.innerText;
+        var allText = modalText.innerHTML;
         var range;
+        
+
+        
         // GET THE LATEST RANGE OBJECT
         for (var i = 0; i < selObj.rangeCount; i++) {
             range = selObj.getRangeAt(i);
         }
-
+        
         if ((bInEditor)&&(sHighlightedText.length > 0)){
 
-            var sQuestion = allText.substring(0, range.startOffset) +
+            var sQuestion = document.getElementById('txtPrefix').value + 
+               allText.substring(0, selObj.anchorOffset) +
                sHighlightedText.replace(/[^\s]{1}/gi, '_') +
-               allText.substring(range.startOffset + range.endOffset);
+               allText.substring(selObj.anchorOffset + sHighlightedText.length);
 
             SaveText(sQuestion,sHighlightedText);
 
@@ -93,7 +106,7 @@ var modal, span, modalText, bInEditor;
             bInEditor = false;
 
         } else if ((!bInEditor)&&(sHighlightedText.length > 0)){
-            modalText.innerText = sHighlightedText;
+            modalText.innerText = sHighlightedText.replace(/\r\n/gi,'');
             modal.style.display = "block";
             bInEditor = true;
         }
@@ -103,6 +116,10 @@ var modal, span, modalText, bInEditor;
 
     
 })();
+
+
+
+
 
 function SaveText(q,a){
 GM_xmlhttpRequest({
