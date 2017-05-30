@@ -117,7 +117,24 @@ var modal, span, modalText, bInEditor, prefix;
     
 })();
 
+/*
+CODE FOR SIDEKICK...
 
+document.body.innerHTML += '<div id="rr_menu">one</div>'; 
+var rrMenu = document.getElementById('rr_menu');
+rrMenu.style.position = 'fixed';
+rrMenu.style.padding = '20px';
+rrMenu.style.height = '100px';
+rrMenu.style.width ='400px';
+rrMenu.style.top = 0;
+rrMenu.style.left = 0;
+rrMenu.style.zIndex = '5000';
+rrMenu.style.backgroundColor = 'white';
+
+rrMenu.style.display = 'block';
+
+
+*/
 
 
 
