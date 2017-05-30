@@ -12,6 +12,9 @@ DROP TABLE [OrderedList]
 DROP TABLE [QAText]
 DROP TABLE [QATextType];
 
+DROP TABLE [MultipleChoiceAnswer]
+DROP TABLE [MultipleChoice]
+
 DROP TABLE [Category];
 
 

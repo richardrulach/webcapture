@@ -143,5 +143,34 @@ REFERENCES OrderedList(OrderedListId)
 GO
 
 
+CREATE TABLE [MultipleChoice](
+	MultipleChoiceId	INT				IDENTITY(1,1)	PRIMARY KEY,
+	CategoryId			INT				NOT NULL,
+	Question			NVARCHAR(1000)	NOT NULL,
+	iOrder				INT				NOT NULL		DEFAULT 0,
+	dtAdded				DATETIME		NOT NULL		DEFAULT GETDATE(),
+	dtUpdated			DATETIME		NOT NULL		DEFAULT GETDATE()
+)
+
+ALTER TABLE dbo.[MultipleChoice]
+ADD CONSTRAINT FK_MultipleChoice_Category FOREIGN KEY(CategoryId) 
+REFERENCES Category(CategoryId)
+GO
+
+CREATE TABLE MultipleChoiceAnswer(
+	MultipleChoiceAnswerId		INT				IDENTITY(1,1)	PRIMARY KEY,
+	MultipleChoiceId			INT				NOT NULL,
+	Answer						NVARCHAR(200)	NOT NULL,
+	isCorrect					BIT				NOT NULL		DEFAULT 0,	
+	iOrder						INT				NOT NULL		DEFAULT 0,
+	dtAdded						DATETIME		NOT NULL		DEFAULT GETDATE(),
+	dtUpdated					DATETIME		NOT NULL		DEFAULT GETDATE()
+)
+GO
+
+ALTER TABLE dbo.[MultipleChoiceAnswer]
+ADD CONSTRAINT FK_MultipleChoiceAnswer_MultipleChoice FOREIGN KEY(MultipleChoiceId) 
+REFERENCES MultipleChoice(MultipleChoiceId)
+GO
 
 
