@@ -31,7 +31,8 @@ CREATE TABLE [CodeType](
 GO
 
 INSERT INTO [dbo].[CodeType]([Name], iOrder)
-VALUES ('SQL' , 1),('JQuery', 2),('C#', 3),('HTML', 4),('CSS', 5)
+VALUES	('SQL' , 1),('T-SQL' , 2),('JavaScript', 3),
+		('JQuery', 4),('C#', 5),('HTML', 6),('CSS', 7)
 GO
 
 
