@@ -1,0 +1,12 @@
+﻿body {
+}
+
+header > ul {
+    padding: 0px 0px 20px 0px;
+    border-bottom: 1px solid black; 
+}
+
+header > ul > li {
+    display: inline-block;
+    padding-right: 40px;
+}
