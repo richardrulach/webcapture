@@ -23,7 +23,7 @@ public partial class Export : System.Web.UI.Page
         SqlCommand sqlcommand = new SqlCommand();
         sqlcommand.Connection = sqlconnection;
 
-        sqlcommand.CommandText = "select answer, question from [text] order by textid asc";
+        sqlcommand.CommandText = "select answer, question from [qatext] order by qatextid asc";
 
         SqlDataReader dr = sqlcommand.ExecuteReader();
 

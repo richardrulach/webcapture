@@ -34,8 +34,7 @@ public class WebService : System.Web.Services.WebService {
     public string SaveText(String question, String answer)
     {
         String conn = Constants.CONNECTION_STRING();
-
-        String sql = @"insert into [text]([textTypeId],[CategoryId],[question],[answer]) values (1,1,'" + question + "','" + answer + "')";
+        String sql = @"insert into [QAText]([QATextTypeId],[CategoryId],[question],[answer]) values (1,1,'" + question + "','" + answer + "')";
 
         SqlCommand runRulesCmd = new SqlCommand();
         SqlConnection sqlconnection = new SqlConnection(conn);
@@ -58,7 +57,7 @@ public class WebService : System.Web.Services.WebService {
     {
         String conn = Constants.CONNECTION_STRING();
 
-        String sql = @"insert into [text]([textTypeId],[CategoryId],[text]) values (1, 1,'defaultText')";
+        String sql = @"insert into [QAText]([QATextTypeId],[CategoryId],[question],[answer]) values (1, 1,'what is the capital of london','n/a')";
 
         SqlCommand runRulesCmd = new SqlCommand();
         SqlConnection sqlconnection = new SqlConnection(conn);
@@ -84,7 +83,7 @@ public class WebService : System.Web.Services.WebService {
         
         ArrayList al = new ArrayList();
 
-        String sql = @"select [text] from Text ";
+        String sql = @"select [question] from QAText ";
 
         SqlCommand runRulesCmd = new SqlCommand();
         SqlConnection sqlconnection = new SqlConnection(conn);
