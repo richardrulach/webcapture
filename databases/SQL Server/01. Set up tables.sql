@@ -96,6 +96,21 @@ ADD CONSTRAINT FK_QAText_Category FOREIGN KEY(CategoryId)
 REFERENCES Category(CategoryId)
 GO
 
+CREATE TABLE [QATextExtra](
+	QATextExtraId		INT					IDENTITY(1,1)		PRIMARY KEY,
+	QATextId			INT					NOT NULL,
+	Question			NVARCHAR(1000)		NOT NULL,
+	iOrder				INT					NOT NULL			DEFAULT 0,
+	dtAdded				DATETIME			NOT NULL			DEFAULT GETDATE(),
+	dtUpdated			DATETIME			NOT NULL			DEFAULT GETDATE()
+)
+GO
+
+ALTER TABLE [QATextExtra]
+ADD CONSTRAINT FK_QATextExtra_QAText FOREIGN KEY(QATextId)
+REFERENCES QAText(QATextId)
+GO
+
 
 CREATE TABLE [MemorisationText](
 	MemorisationTextId	INT					IDENTITY(1,1)		PRIMARY KEY,
