@@ -1,8 +1,10 @@
 
 USE cards
 
+DROP TABLE [GroupMap];
 DROP TABLE [GroupQuestionItem];
 DROP TABLE [Grouping];
+DROP TABLE [GroupSet];
 DROP TABLE [GroupQuestion];
 
 DROP TABLE [MemorisationText]

@@ -190,9 +190,24 @@ ADD CONSTRAINT FK_GroupQuestion_Category FOREIGN KEY(CategoryId)
 REFERENCES Category(CategoryId)
 GO
 
+CREATE TABLE [GroupSet](
+	GroupSetId			INT				IDENTITY(1,1)		PRIMARY KEY,
+	GroupQuestionId		INT				NOT NULL,
+	GroupSetQuestion	NVARCHAR(200)	NOT NULL,
+	iOrder				INT				NOT NULL			DEFAULT 0,
+	dtAdded				DATETIME		NOT NULL			DEFAULT GETDATE(),
+	dtUpdated			DATETIME		NOT NULL			DEFAULT GETDATE()
+)
+GO
+
+ALTER TABLE	[GroupSet]
+ADD CONSTRAINT FK_GroupSet_GroupQuestion FOREIGN KEY(GroupQuestionId)
+REFERENCES GroupQuestion(GroupQuestionId)
+GO
+
 CREATE TABLE [Grouping](
 	GroupingId			INT				IDENTITY(1,1)		PRIMARY KEY,
-	GroupQuestionId		INT				NOT NULL,
+	GroupSetId			INT				NOT NULL,
 	[Name]				NVARCHAR(100)	NOT NULL,
 	iOrder				INT				NOT NULL			DEFAULT 0,
 	dtAdded				DATETIME		NOT NULL			DEFAULT GETDATE(),
@@ -201,15 +216,14 @@ CREATE TABLE [Grouping](
 GO
 
 ALTER TABLE [Grouping]
-ADD CONSTRAINT FK_Grouping_GroupQuestion FOREIGN KEY(GroupQuestionId)
-REFERENCES GroupQuestion(GroupQuestionId)
+ADD CONSTRAINT FK_Grouping_GroupSet FOREIGN KEY(GroupSetId)
+REFERENCES GroupSet(GroupSetId)
 GO
 
 
 CREATE TABLE [GroupQuestionItem](
-	GroupingQuestionItemId		INT				IDENTITY(1,1)		PRIMARY KEY,
+	GroupQuestionItemId			INT				IDENTITY(1,1)		PRIMARY KEY,
 	GroupQuestionId				INT				NOT NULL,
-	GroupingId					INT				NOT NULL,
 	[Text]						NVARCHAR(300)	NOT NULL,
 	iOrder						INT				NOT NULL			DEFAULT 0,
 	dtAdded						DATETIME		NOT NULL			DEFAULT GETDATE(),
@@ -222,11 +236,24 @@ ADD CONSTRAINT FK_GroupQuestionItem_GroupQuestion FOREIGN KEY(GroupQuestionId)
 REFERENCES GroupQuestion(GroupQuestionId)
 GO
 
-ALTER TABLE GroupQuestionItem
-ADD CONSTRAINT FK_GroupQuestionItem_Grouping FOREIGN KEY(GroupingId)
-REFERENCES [Grouping](GroupingId)
+CREATE TABLE [GroupMap](
+	GroupQuestionItemId		INT		NOT NULL,
+	GroupingId				INT		NOT NULL
+)
 GO
 
+ALTER TABLE [GroupMap] ADD PRIMARY KEY(GroupQuestionItemId, GroupingId)
+GO
+
+ALTER TABLE [GroupMap] 
+ADD CONSTRAINT FK_GroupMap_GroupQuestionItem FOREIGN KEY (GroupQuestionItemId)
+REFERENCES GroupQuestionItem(GroupQuestionItemId)
+GO
+
+ALTER TABLE [GroupMap]
+ADD CONSTRAINT FK_GroupMap_Grouping FOREIGN KEY (GroupingId)
+REFERENCES [Grouping](GroupingId)
+GO
 
 
 
