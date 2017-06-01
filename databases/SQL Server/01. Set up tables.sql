@@ -175,3 +175,60 @@ REFERENCES MultipleChoice(MultipleChoiceId)
 GO
 
 
+CREATE TABLE [GroupQuestion](
+	GroupQuestionId		INT				IDENTITY(1,1)		PRIMARY KEY,
+	CategoryId			INT				NOT NULL,
+	[Name]				NVARCHAR(100)	NOT NULL,
+	iOrder				INT				NOT NULL			DEFAULT 0,
+	dtAdded				DATETIME		NOT NULL			DEFAULT GETDATE(),
+	dtUpdated			DATETIME		NOT NULL			DEFAULT GETDATE()
+)
+GO
+
+ALTER TABLE GroupQuestion
+ADD CONSTRAINT FK_GroupQuestion_Category FOREIGN KEY(CategoryId)
+REFERENCES Category(CategoryId)
+GO
+
+CREATE TABLE [Grouping](
+	GroupingId			INT				IDENTITY(1,1)		PRIMARY KEY,
+	GroupQuestionId		INT				NOT NULL,
+	[Name]				NVARCHAR(100)	NOT NULL,
+	iOrder				INT				NOT NULL			DEFAULT 0,
+	dtAdded				DATETIME		NOT NULL			DEFAULT GETDATE(),
+	dtUpdated			DATETIME		NOT NULL			DEFAULT GETDATE()
+)
+GO
+
+ALTER TABLE [Grouping]
+ADD CONSTRAINT FK_Grouping_GroupQuestion FOREIGN KEY(GroupQuestionId)
+REFERENCES GroupQuestion(GroupQuestionId)
+GO
+
+
+CREATE TABLE [GroupQuestionItem](
+	GroupingQuestionItemId		INT				IDENTITY(1,1)		PRIMARY KEY,
+	GroupQuestionId				INT				NOT NULL,
+	GroupingId					INT				NOT NULL,
+	[Text]						NVARCHAR(300)	NOT NULL,
+	iOrder						INT				NOT NULL			DEFAULT 0,
+	dtAdded						DATETIME		NOT NULL			DEFAULT GETDATE(),
+	dtUpdated					DATETIME		NOT NULL			DEFAULT GETDATE()
+)
+GO
+
+ALTER TABLE GroupQuestionItem
+ADD CONSTRAINT FK_GroupQuestionItem_GroupQuestion FOREIGN KEY(GroupQuestionId)
+REFERENCES GroupQuestion(GroupQuestionId)
+GO
+
+ALTER TABLE GroupQuestionItem
+ADD CONSTRAINT FK_GroupQuestionItem_Grouping FOREIGN KEY(GroupingId)
+REFERENCES [Grouping](GroupingId)
+GO
+
+
+
+
+
+

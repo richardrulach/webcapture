@@ -1,6 +1,10 @@
 
 USE cards
 
+DROP TABLE [GroupQuestionItem];
+DROP TABLE [Grouping];
+DROP TABLE [GroupQuestion];
+
 DROP TABLE [MemorisationText]
 
 DROP TABLE [Code]
