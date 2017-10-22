@@ -53,6 +53,28 @@ public class WebService : System.Web.Services.WebService {
     }
 
     [WebMethod]
+    public string SaveTextOnly(String question)
+    {
+        String conn = Constants.CONNECTION_STRING();
+        String sql = @"insert into [QAText]([QATextTypeId],[CategoryId],[question],[answer]) values (1,1,'" + question + "','')";
+
+        SqlCommand runRulesCmd = new SqlCommand();
+        SqlConnection sqlconnection = new SqlConnection(conn);
+
+        runRulesCmd.Connection = sqlconnection;
+        runRulesCmd.CommandText = sql;
+
+        sqlconnection.Open();
+
+        runRulesCmd.ExecuteNonQuery();
+
+        sqlconnection.Close();
+        sqlconnection.Dispose();
+
+        return "Saved question: " + question;
+    }
+
+    [WebMethod]
     public string SaveDefaultText()
     {
         String conn = Constants.CONNECTION_STRING();
@@ -83,7 +105,7 @@ public class WebService : System.Web.Services.WebService {
         
         ArrayList al = new ArrayList();
 
-        String sql = @"select [question] from QAText ";
+        String sql = @"select [QATextId] as Id, [question] as text from QAText ";
 
         SqlCommand runRulesCmd = new SqlCommand();
         SqlConnection sqlconnection = new SqlConnection(conn);
@@ -94,13 +116,17 @@ public class WebService : System.Web.Services.WebService {
         sqlconnection.Open();
         SqlDataReader dr = runRulesCmd.ExecuteReader();
 
-        List<String> myText = new List<String>();
+        List<Hashtable> myText = new List<Hashtable>();
 
         while (dr.Read())
         {
-            myText.Add(dr.GetValue(0).ToString());
+            Hashtable ht = new Hashtable();
+            ht.Add("id",dr.GetValue(0).ToString());
+            ht.Add("text", dr.GetValue(1).ToString());
+            myText.Add(ht);
         }
         dr.Close();
+        sqlconnection.Close();
 
         return new JavaScriptSerializer().Serialize(myText);
     }

@@ -36,30 +36,42 @@
 
 
     <script type="text/javascript">
+        var allTextId = [];
 
         $(document).ready(function () {
-            $("#listContainer").html('something');
+            $('#listContainer').html('');
+            loadData();
 
-            $.get("_srv/WebService.asmx/GetText", function (data) {
-
-                $('#listContainer').html('');
-
-                var xDoc = $(data).find('string').text();
-                var obj = JSON.parse(xDoc);
-                for (var i = 0 ; i < obj.length; i++) {
-                    $('#listContainer').append('<div class="qContainer"><div class="questions" contenteditable="true">' + obj[i] + '</div><div class="answers" contenteditable="true"> </div></div>');
-                }
-
-                reloadEvents();
-            });
-
-
+            setInterval(loadData, 1000);
 
         });
 
-        function reloadEvents() {
-            $(".questions").mouseup(function (e) {
+        function loadData()
+        {
+            $.get("_srv/WebService.asmx/GetText", function (data) {
 
+                var xDoc = $(data).find('string').text();
+                var obj = JSON.parse(xDoc);
+
+                for (var i = 0; i < obj.length; i++) {
+                    //console.log(obj[i].id + " = " + obj[i].text);
+
+                    if (!allTextId.includes(obj[i].id)) {
+                        allTextId.push(obj[i].id);
+                        $('#listContainer').append('<div class="qContainer"><div class="questions" contenteditable="true">' + obj[i].text + '</div><div class="answers" contenteditable="true"> </div></div>');
+                        $('#listContainer > .qContainer').last().data('id', obj[i].id);
+                        AddEvent($('#listContainer > .qContainer').last());
+                    } else {
+                        //console.log('already contains: ' + obj[i].id);
+                    }
+                }
+
+            });
+        }
+
+
+        function AddEvent(element) {
+            element.mouseup(function (e) {
                 if ($('#rdEditMode').prop('checked') != true) {
 
                     var selObj = window.getSelection();
@@ -122,6 +134,7 @@
 
     <div id="output">
     </div>
+    
     </form>
 </body>
 </html>
