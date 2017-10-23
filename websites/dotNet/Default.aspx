@@ -79,6 +79,8 @@
                     var allText = $(e.target).text();
                     var range;
 
+                    if (selectedText.length == 0) return;
+
                     // GET THE LATEST RANGE OBJECT
                     for (var i = 0; i < selObj.rangeCount; i++) {
                         range = selObj.getRangeAt(i);
