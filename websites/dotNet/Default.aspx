@@ -9,6 +9,9 @@
         {
             width:45%;
             float:left;
+            border: 1px dashed grey; 
+            padding:3px;
+            margin:3px;
         }
 
         .answers 
@@ -16,6 +19,9 @@
             padding-left: 15px;
             width:45%;
             float:left;
+            border: 1px dashed grey; 
+            padding:3px;
+            margin:3px;
         }
 
         .qContainer 
