@@ -21,8 +21,10 @@
    document.onmouseup = function(){
         var selObj = window.getSelection();
         var sHighlightedText = selObj.toString();
+
+        if (sHighlightedText.length == 0) return;
         SaveText(sHighlightedText,'');
-      selObj.removeAllRanges();
+        selObj.removeAllRanges();
     };
 
 })();
