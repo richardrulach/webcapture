@@ -64,7 +64,12 @@
 
                     if (!allTextId.includes(obj[i].id)) {
                         allTextId.push(obj[i].id);
-                        $('#listContainer').append('<div class="qContainer"><div class="questions" contenteditable="true">' + obj[i].text + '</div><div class="answers" contenteditable="true"> </div></div>');
+                        $('#listContainer').append('<div class="qContainer"><div class="questions" contenteditable="true">' + obj[i].text + '</div>' + 
+                            '<div class="answers" contenteditable="true"> </div>' +
+                            '<input type="button" onclick="addToPrevious(this)" value="Add to previous" />' +
+                            '<input type="button" onclick="deleteElem(this)" value="delete" />' +
+                            '<input type="button" onclick="flip(this)" value="flip" />' +
+                            '</div>');
                         $('#listContainer > .qContainer').last().data('id', obj[i].id);
                         AddEvent($('#listContainer > .qContainer').last());
                     } else {
@@ -75,6 +80,22 @@
             });
         }
 
+        function addToPrevious(elem) {
+            var sText = $(elem).parent().find('.questions').text();
+            $(elem).parent().prev().find('.answers').text(sText);
+            $(elem).parent().remove();
+        }
+
+        function deleteElem(elem) {
+            $(elem).parent().remove();
+        }
+
+        function flip(elem) {
+            var sQuestion = $(elem).parent().find('.questions').text();
+            var sAnswer = $(elem).parent().find('.answers').text();
+            $(elem).parent().find('.questions').text(sAnswer);
+            $(elem).parent().find('.answers').text(sQuestion);
+        }
 
         function AddEvent(element) {
             element.mouseup(function (e) {
@@ -107,7 +128,7 @@
         function generateOutput() {
             var s = '';
             $('.questions').each(function (i, e) {
-                s += $(e).next().text() + '|' + $(e).text() + '¬';
+                s += $(e).parent().find('.answers').text() + '|' + $(e).text() + '¬';
             });
             $('#output').text(s);
             copyToClipboard($('#output'));
@@ -142,7 +163,9 @@
 
     <div id="output">
     </div>
-    
+    <div>
+        <input type="button" onclick="generateOutput()" value="Generate" />
+    </div>
     </form>
 </body>
 </html>
